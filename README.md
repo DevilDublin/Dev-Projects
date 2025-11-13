@@ -1,6 +1,9 @@
 # Dev Projects
 
-This repository is a collection of small, focused developer projects. Each project is designed to be practical, easy to run locally, and demonstrates a specific task in analytics, automation, or web development using Python, Flask, and vanilla HTML/CSS/JavaScript.
+This repository is a collection of small, focused developer projects that were built between 2023–2025 as part of my university work and my hobby. Zypher AI is my most recent project for a business plan. The project for Zypher in this repo is a mock of my actual website I am currently working and experimenting on. This will soon be published on Zypheragents.com
+
+This repository collects them into one organised place.
+. Each project is designed to be practical, easy to run locally, and demonstrates a specific task in analytics, automation, or web development using Python, Flask, and vanilla HTML/CSS/JavaScript.
 
 ## Projects Overview
 
