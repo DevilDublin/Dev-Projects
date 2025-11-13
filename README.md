@@ -1,5 +1,4 @@
 # Dev Projects
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/DevilDublin/Dev-Projects)
 
 This repository is a collection of small, focused developer projects. Each project is designed to be practical, easy to run locally, and demonstrates a specific task in analytics, automation, or web development using Python, Flask, and vanilla HTML/CSS/JavaScript.
 
