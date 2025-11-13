@@ -1,4 +1,6 @@
-name,current_quantity,average_daily_usage
-Coffee beans,5,0.5
-Printer paper,3,0.3
-Bottled water,10,1.2
+Item,Qty,DailyUsage
+Coffee beans,30,5
+Printer paper,200,12
+Bottled water,15,3
+USB cables,8,4
+Phone cases,5,2

@@ -1,19 +1,119 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>AI Call Analytics Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>AI Call Analytics Dashboard</h1>
-  <div class="stats">
-    <div class="card"><h2>Total calls</h2><p id="total-calls">–</p></div>
-    <div class="card"><h2>Confirmed</h2><p id="confirmed">–</p></div>
-    <div class="card"><h2>Reschedules</h2><p id="reschedules">–</p></div>
-    <div class="card"><h2>No answers</h2><p id="no-answers">–</p></div>
-  </div>
-  <pre id="raw"></pre>
+  <main class="shell">
+    <div class="layout">
+      <!-- PRIMARY DASHBOARD -->
+      <section class="primary">
+        <header class="header">
+          <div>
+            <h1>AI Call Analytics</h1>
+            <p>Lightweight dashboard for tracking how well AI voice agents confirm and reschedule appointments.</p>
+          </div>
+          <div class="badge">
+            <span class="dot"></span>
+            <span>Demo data – ready for real exports</span>
+          </div>
+        </header>
+
+        <section class="stats-grid">
+          <article class="stat-card">
+            <h2>Total calls</h2>
+            <p id="total-calls">–</p>
+            <p class="hint">Overall call volume handled by the AI agent in this period.</p>
+          </article>
+
+          <article class="stat-card">
+            <h2>Confirmed</h2>
+            <p id="confirmed">–</p>
+            <span class="pill" id="confirmed-rate">–%</span>
+            <p class="hint">Bookings successfully confirmed without human intervention.</p>
+          </article>
+
+          <article class="stat-card">
+            <h2>Reschedules</h2>
+            <p id="reschedules">–</p>
+            <p class="hint">Calls where the lead changed the appointment time.</p>
+          </article>
+
+          <article class="stat-card">
+            <h2>No answers</h2>
+            <p id="no-answers">–</p>
+            <p class="hint">Useful for deciding when to introduce follow-up SMS or email.</p>
+          </article>
+
+          <article class="stat-card wide">
+            <h2>Average call duration</h2>
+            <p><span id="avg-duration">–</span> seconds</p>
+            <p class="hint">Indicates how long the agent typically spends on each call.</p>
+          </article>
+        </section>
+
+        <section class="chart-card">
+          <div class="chart-header">
+            <div>
+              <h2>Calls per day</h2>
+              <span class="chart-caption">Each bar represents the number of calls for that day in the period.</span>
+            </div>
+            <span class="mini-tag">From <code>data.json</code></span>
+          </div>
+          <div class="chart" id="bar-chart"></div>
+        </section>
+
+        <section class="raw-card">
+          <div class="raw-header">
+            <div>
+              <h2>Raw JSON payload</h2>
+              <span>Data structure consumed by the dashboard. Can be swapped for live API output.</span>
+            </div>
+            <span class="mini-tag">Developer view</span>
+          </div>
+          <pre id="raw"></pre>
+        </section>
+      </section>
+
+      <!-- GUIDE / CONTEXT PANEL -->
+      <aside class="guide">
+        <div class="guide-card">
+          <h3>What this dashboard shows</h3>
+          <p>
+            The dashboard provides a concise view of call outcomes for AI voice agents that handle appointment bookings.
+            It focuses on the core metrics that matter for performance:
+          </p>
+          <ul>
+            <li><strong>Call volume</strong> – how many leads the agent is speaking to.</li>
+            <li><strong>Confirmed bookings</strong> – how many calls successfully convert.</li>
+            <li><strong>Reschedules</strong> – leads who stay warm but move to a new time.</li>
+            <li><strong>No answers</strong> – missed opportunities that may need follow-up automation.</li>
+          </ul>
+        </div>
+
+        <div class="guide-card">
+          <h3>Role in an AI calling workflow</h3>
+          <p>
+            The dashboard sits on top of call logs from AI voice agents and turns them into an at-a-glance operational view.
+          </p>
+          <ul>
+            <li>AI agent places and receives calls with leads.</li>
+            <li>The calling platform records outcomes and basic statistics.</li>
+            <li>A JSON export or API endpoint provides aggregated metrics.</li>
+            <li>This dashboard renders those metrics as cards, charts and raw data for review.</li>
+          </ul>
+          <p class="guide-note">
+            In a production environment the JSON would typically be returned by an HTTP API rather than a local file,
+            but the visual layer remains the same.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>

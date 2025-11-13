@@ -1,53 +1,126 @@
 import csv
-from datetime import datetime, timedelta
-
-DATA_FILE = "inventory.csv"
+from pathlib import Path
 
 
 def load_inventory():
-  items = []
-  try:
-    with open(DATA_FILE, newline="", encoding="utf-8") as f:
-      reader = csv.DictReader(f)
-      for row in reader:
-        row["current_quantity"] = int(row.get("current_quantity", 0))
-        row["average_daily_usage"] = float(row.get("average_daily_usage", 0))
-        items.append(row)
-  except FileNotFoundError:
-    pass
-  return items
+    csv_path = Path(__file__).with_name("inventory.csv")
+
+    rows = []
+    with csv_path.open(newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            name = row.get("Item") or row.get("item") or row.get("name")
+            qty_raw = row.get("Qty") or row.get("qty") or row.get("quantity")
+            usage_raw = (
+                row.get("DailyUsage")
+                or row.get("daily_usage")
+                or row.get("Daily usage")
+            )
+
+            if not name:
+                continue
+
+            try:
+                qty = int(qty_raw)
+            except (TypeError, ValueError):
+                qty = 0
+
+            try:
+                usage = float(usage_raw)
+            except (TypeError, ValueError):
+                usage = 0.0
+
+            rows.append({"name": name, "qty": qty, "usage": usage})
+
+    return rows
 
 
-def forecast_run_out(item):
-  usage = item["average_daily_usage"]
-  if usage <= 0:
-    return None
-  days = item["current_quantity"] / usage
-  return datetime.today().date() + timedelta(days=int(days))
+def classify_item(qty, usage):
+    if usage <= 0:
+        return float("inf"), "No usage data", None
+
+    days_left = qty / usage
+
+    if days_left < 3:
+        status = "Critical"
+        warning = "Running critically low"
+    elif days_left < 7:
+        status = "Low"
+        warning = "Should be reordered soon"
+    else:
+        status = "OK"
+        warning = None
+
+    return days_left, status, warning
+
+
+def format_table(rows):
+    header = (
+        f"{'Item':<24}"
+        f"{'Qty':<7}"
+        f"{'Daily usage':<14}"
+        f"{'Days left':<11}"
+        f"{'Status':<12}"
+    )
+    separator = "-" * len(header)
+
+    lines = [header, separator]
+
+    warnings = []
+
+    for row in rows:
+        name = row["name"]
+        qty = row["qty"]
+        usage = row["usage"]
+
+        days_left, status, warning = classify_item(qty, usage)
+
+        if usage > 0:
+            usage_str = f"{usage:.1f}".rstrip("0").rstrip(".")
+        else:
+            usage_str = "-"
+
+        if days_left == float("inf"):
+            days_str = "-"
+        else:
+            days_str = f"{days_left:.1f}".rstrip("0").rstrip(".")
+
+        line = (
+            f"{name:<24}"
+            f"{qty:<7}"
+            f"{usage_str:<14}"
+            f"{days_str:<11}"
+            f"{status:<12}"
+        )
+        lines.append(line)
+
+        if warning:
+            warnings.append(f"- {name}: {warning}")
+
+    return lines, warnings
 
 
 def main():
-  print("=== Smart Inventory Tracker (demo) ===")
-  items = load_inventory()
-  if not items:
-    print("No inventory.csv file found. Create one with columns: name,current_quantity,average_daily_usage")
-    return
+    print()
+    print(" SMART INVENTORY TRACKER — CONSOLE VIEW")
+    print(" -------------------------------------")
+    print()
 
-  for item in items:
-    name = item.get("name", "Unknown")
-    run_out_date = forecast_run_out(item)
-    print(f"\nItem: {name}")
-    print(f"Current quantity: {item['current_quantity']}")
-    print(f"Average daily usage: {item['average_daily_usage']}")
-    if run_out_date:
-      print(f"Estimated run-out date: {run_out_date.isoformat()}")
-      days_left = (run_out_date - datetime.today().date()).days
-      if days_left <= 3:
-        print("Warning: This item is likely to run out within 3 days.")
+    rows = load_inventory()
+    lines, warnings = format_table(rows)
+
+    for line in lines:
+        print(line)
+
+    if warnings:
+        print()
+        print("Warnings:")
+        for w in warnings:
+            print(w)
     else:
-      print("Not enough data to forecast.")
-  print("\nDemo complete.")
+        print()
+        print("No low-stock warnings.")
 
 
 if __name__ == "__main__":
-  main()
+    main()

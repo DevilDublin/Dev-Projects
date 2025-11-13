@@ -1,28 +1,199 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Email Summariser & Action Extractor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #151b2b 0, #050711 55%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f5f5f5;
+    }
+    .shell {
+      width: 100%;
+      max-width: 980px;
+      padding: 24px;
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    @media (min-width: 880px) {
+      .grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      }
+    }
+    .card {
+      background: rgba(9, 13, 24, 0.96);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      border: 1px solid #23293b;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5);
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #a2a7bb;
+      margin: 0 0 14px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 260px;
+      resize: vertical;
+      border-radius: 14px;
+      border: 1px solid #32384a;
+      background: #070915;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #f5f5f5;
+      outline: none;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                   "Liberation Mono", "Courier New", monospace;
+      line-height: 1.4;
+    }
+    textarea:focus {
+      border-color: #39ff14;
+      box-shadow: 0 0 0 1px rgba(57, 255, 20, 0.25);
+    }
+    .actions-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #39ff14;
+      color: #02040a;
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid #32384a;
+      color: #cfd3e6;
+    }
+    .footnote {
+      font-size: 11px;
+      color: #8f95ad;
+      margin-top: 6px;
+    }
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 3px 10px 4px;
+      border-radius: 999px;
+      background: rgba(57, 255, 20, 0.1);
+      color: #8eff6a;
+      border: 1px solid rgba(57, 255, 20, 0.35);
+      white-space: nowrap;
+    }
+    .label {
+      font-size: 12px;
+      color: #9ea4b8;
+      margin-bottom: 4px;
+    }
+    .summary-box,
+    .actions-box {
+      background: #050815;
+      border-radius: 12px;
+      border: 1px solid #262d3e;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+    .placeholder {
+      color: #7d83a0;
+      font-size: 12px;
+    }
+    ul.action-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Email Summariser & Action Extractor</h1>
-  <form method="post">
-    <textarea name="body" rows="10" cols="80" placeholder="Paste email text here">{{ original }}</textarea><br>
-    <button type="submit">Summarise</button>
-  </form>
+  <div class="shell">
+    <div class="grid">
+      <div class="card">
+        <h1>Email Summariser & Action Extractor</h1>
+        <p class="subtitle">Paste a long email on the left. Get a short summary and clear action points on the right.</p>
 
-  {% if summary %}
-    <h2>Summary</h2>
-    <p>{{ summary }}</p>
-  {% endif %}
+        <form method="post">
+          <textarea
+            name="email_text"
+            placeholder="Paste a client email here…"
+          >{% if request.method == 'POST' %}{{ request.form.get('email_text', '') }}{% endif %}</textarea>
 
-  {% if actions %}
-    <h2>Action Points</h2>
-    <ul>
-      {% for a in actions %}
-        <li>{{ a }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+          <div class="actions-row">
+            <div>
+              <button class="btn-primary" type="submit">Summarise email</button>
+              <button class="btn-ghost" type="button" onclick="window.location.href='/'">
+                Clear output
+              </button>
+            </div>
+            <span class="footnote">All processing happens locally on your machine.</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="output-header">
+          <h2 style="margin:0;font-size:16px;">Output</h2>
+          <span class="badge">Summary & actions</span>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <div class="label">Summary</div>
+          <div class="summary-box">
+            {% if summary %}
+              {{ summary }}
+            {% else %}
+              <span class="placeholder">Summary will appear here after you submit an email.</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div>
+          <div class="label">Action points</div>
+          <div class="actions-box">
+            {% if actions %}
+              <ul class="action-list">
+                {% for item in actions %}
+                  <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <span class="placeholder">Detected action points will be listed here.</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
