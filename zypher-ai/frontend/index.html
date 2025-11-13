@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zypher AI – Automation Suite</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="zy-header">
+    <div class="zy-logo">ZYPHER AI</div>
+    <p class="zy-tagline">Automation suite for calls, leads and appointments.</p>
+  </header>
+
+  <main class="zy-main">
+    <section class="zy-grid">
+      <article class="zy-card" data-agent="appointment">
+        <h2>Appointment Agent</h2>
+        <p>Confirms and reschedules appointments automatically.</p>
+        <button class="zy-btn">Preview Agent</button>
+      </article>
+
+      <article class="zy-card" data-agent="qualification">
+        <h2>Lead Qualification Agent</h2>
+        <p>Qualifies leads before they reach your calendar.</p>
+        <button class="zy-btn">Preview Agent</button>
+      </article>
+
+      <article class="zy-card" data-agent="analytics">
+        <h2>Call Analytics</h2>
+        <p>Summarises calls and tracks performance in real time.</p>
+        <button class="zy-btn">View Analytics</button>
+      </article>
+    </section>
+
+    <section class="zy-output">
+      <h3>Agent Output</h3>
+      <pre id="zy-output-box">Select an agent to see a demo response.</pre>
+    </section>
+  </main>
+
+  <footer class="zy-footer">
+    <small>Demo only – mock backend, no real customer data.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "totalCalls": 42,
+  "successfulConfirmations": 34,
+  "reschedules": 5,
+  "noAnswers": 3,
+  "averageCallDuration": 58,
+  "dailyCalls": [
+    3,
+    7,
+    6,
+    5,
+    4,
+    8,
+    9
+  ]
+}

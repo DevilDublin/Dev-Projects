@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Email Summariser & Action Extractor</title>
+</head>
+<body>
+  <h1>Email Summariser & Action Extractor</h1>
+  <form method="post">
+    <textarea name="body" rows="10" cols="80" placeholder="Paste email text here">{{ original }}</textarea><br>
+    <button type="submit">Summarise</button>
+  </form>
+
+  {% if summary %}
+    <h2>Summary</h2>
+    <p>{{ summary }}</p>
+  {% endif %}
+
+  {% if actions %}
+    <h2>Action Points</h2>
+    <ul>
+      {% for a in actions %}
+        <li>{{ a }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>
