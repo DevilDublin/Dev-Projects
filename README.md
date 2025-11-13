@@ -1,126 +1,123 @@
 Dev Projects
-A collection of small, focused projects built between 2023 and 2025. Each project is simple to run locally and designed to be understandable, practical and close to real-world automation or analytics tasks.
-Quick Start (All Projects)
-Below are the exact commands to run each project. These are written as plain text — just copy the line you need.
-AI Call Analytics Dashboard:
+A collection of small, focused projects built between 2023 and 2025. Each project is designed to be simple to run locally, practical, and close to real-world automation or analytics tasks.
+⚡ Quick Start (All Projects)
+Below are the exact commands to run each project locally.
+Copy only the commands you need.
+AI Call Analytics Dashboard
 cd ai-call-analytics-dashboard
 python3 -m http.server 3000
 Open http://localhost:3000
-Password Strength Auditor:
+Password Strength Auditor
 cd password-strength-auditor
 python3 -m http.server 3001
 Open http://localhost:3001
-Email Summariser (Flask):
+Email Summariser & Action Extractor (Flask)
 cd email-summariser-action-extractor
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python3 app.py
 Open http://127.0.0.1:5000
-Zypher AI Automation Suite:
+Zypher AI Automation Suite (Multi-Agent Demo)
 cd zypher-ai
 python3 -m http.server 3002
 Open http://localhost:3002
-Smart Inventory Tracker:
+Smart Inventory Tracker (Console Application)
 cd smart-inventory-tracker
 python3 inventory_tracker.py
-Projects
 1. AI Call Analytics Dashboard (2025)
-A lightweight dashboard for viewing call outcomes from AI voice agents, including confirmations, reschedules, average duration and daily call counts.
+A lightweight browser dashboard for viewing call outcomes from AI voice agents.
+It visualises:
+• Total calls
+• Confirmations
+• Reschedules
+• No answers
+• Average call duration
+• Daily call counts (bar chart)
 Screenshots
-(Your images)
-analytics_overview.png
-analytics_calls_per_day.png
-analytics_raw_json.png
+
+
 How to Run
 cd ai-call-analytics-dashboard
 python3 -m http.server 3000
-Open in browser:
-http://localhost:3000
+Open http://localhost:3000
 How to Test
-Change the values inside data/data.json, such as:
-totalCalls
-successfulConfirmations
-reschedules
-dailyCalls
-Refresh the browser — the cards and green bar chart update instantly.
+Inside data/data.json, change values such as:
+• totalCalls
+• successfulConfirmations
+• reschedules
+• dailyCalls
+Refresh the browser — charts update instantly.
 2. Password Strength Auditor (2024)
-A browser-based password analyser that scores strength, explains weaknesses and suggests stronger, realistic alternatives. Everything runs locally.
+A small browser-based password auditor that scores password strength, explains weaknesses, and suggests stronger alternatives. Everything runs locally — nothing is sent anywhere.
 Screenshots
-password_strong.png
-password_weak.png
-password_very_strong.png
+
+
 How to Run
 cd password-strength-auditor
 python3 -m http.server 3001
 Open http://localhost:3001
-How to Test
-Try these example passwords:
-Very weak:
-password
-Strong:
-Summer2024!
-Very strong:
-Zypher!AI_9021#24
+Test With These Example Passwords
+Very weak: password
+Strong: Summer2024!
+Very strong: Zypher!AI_9021#24
 You should see:
-Strength label
-Score
-Weakness breakdown
-Suggested variants
+• Strength label
+• Score
+• Weakness breakdown
+• Suggested variants
 3. Email Summariser & Action Extractor (2024)
-A Flask-based tool that summarises long emails and extracts clear action items. Ideal for work or study.
+A Flask-based tool that summarises long emails and extracts clearer action points. Ideal for work or study.
 Screenshot
-email_summariser_output.png
 How to Run
 cd email-summariser-action-extractor
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python3 app.py
-Open in browser:
-http://127.0.0.1:5000
-How to Test
-Paste any long email (work, uni, etc.) and click “Summarise Email”.
-You should get:
-A clean, readable summary
-Bullet-point action items
+Open http://127.0.0.1:5000
+Features
+• Clean summary
+• Action points
+• No data is uploaded — fully local
 4. Zypher AI – Automation Suite (2025)
-A front-end showcase of:
-Appointment confirmation agent
-Lead qualification agent
-Call analytics viewer
+A multi-agent automation demo showcasing three fictional AI agents:
+• Appointment Agent
+• Lead Qualification Agent
+• Call Analytics
 Screenshots
-zypher_agents_home.png
-zypher_agent_lead_qualification.png
-zypher_agent_call_analytics.png
-zypher_agent_appointment_confirmation.png
+
+
+
 How to Run
 cd zypher-ai
 python3 -m http.server 3002
 Open http://localhost:3002
 How to Test
-Click the buttons:
-Preview Agent (Appointment)
-Preview Agent (Lead Qualification)
-View Analytics
-The output panel on the right should update with:
-Confirmation / reschedule messages
-Qualification score + reasoning
-Analytics JSON with call stats
+Click each agent on screen and watch the JSON output response appear in real time.
 5. Smart Inventory Tracker (2024)
-A command-line tool that examines stock levels, calculates remaining days and flags low/critical items.
+A console-based Python program that calculates days remaining before stock runs out, and flags items that need reordering.
 Screenshot
-inventory_tracker_output.png
 How to Run
 cd smart-inventory-tracker
 python3 inventory_tracker.py
-How to Test
-Edit the file inventory.csv and change some numbers, for example:
-Coffee beans, 30, 5
-USB cables, 2, 4
-Printer paper, 300, 5
-Re-run the script.
-You’ll see:
-Updated days left
-Items marked Low or Critical
-Warnings printed beneath the table
+What It Shows
+• Item
+• Quantity
+• Daily usage
+• Days left
+• Status (OK / Low / Critical)
+• A list of warnings at the bottom
+Folder Structure
+Each project sits in its own folder so you can explore, test, and modify them independently.
+Editing This README
+You can update this README directly in VS Code:
+Open README.md
+Edit normally
+Save the file
+Then run:
+git add README.md
+git commit -m "Update README"
+git push origin main
+Or if you want everything staged automatically:
+git add . && git commit -m "Update README" && git push origin main
