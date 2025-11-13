@@ -1,4 +1,3 @@
-
 Dev Projects
 A collection of small, focused projects built between 2023 and 2025. Each project is simple to run locally and designed to be understandable, practical and close to real-world automation or analytics tasks.
 Quick Start (All Projects)
