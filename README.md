@@ -1,122 +1,186 @@
-📌 Dev Projects
-A collection of small, focused projects built between 2023 and 2025.
-Each project is simple to run locally, practical, and close to real-world automation or analytics tasks.
-This README explains what each project does, how to run it, and includes screenshots showing the tools in action.
-⚡ Quick Start (All Projects)
-Copy only the line you need:
-AI Call Analytics Dashboard
-cd ai-call-analytics-dashboard
-python3 -m http.server 3000
-Open http://localhost:3000
-Password Strength Auditor
-cd password-strength-auditor
-python3 -m http.server 3001
-Open http://localhost:3001
-Email Summariser & Action Extractor (Flask)
-cd email-summariser-action-extractor
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 app.py
-Open http://127.0.0.1:5000
-Zypher AI – Automation Suite (Multi-Agent Demo)
-cd zypher-ai
-python3 -m http.server 3002
-Open http://localhost:3002
-Smart Inventory Tracker (Console App)
-cd smart-inventory-tracker
-python3 inventory_tracker.py
-1. AI Call Analytics Dashboard (2025)
-A lightweight browser dashboard for viewing call outcomes from AI voice agents.
-It visualises:
-• Total calls
-• Confirmations
-• Reschedules
-• No answers
-• Average call duration
-• Daily call counts (bar chart)
-Screenshots
-analytics_overview.png
-analytics_calls_per_day.png
-analytics_raw_json.png
-How to Run
-cd ai-call-analytics-dashboard
-python3 -m http.server 3000
-Then open: http://localhost:3000
-How to Test
-Inside data/data.json, change values such as:
-• totalCalls
-• successfulConfirmations
-• reschedules
-• dailyCalls
-Refresh the browser — charts update instantly.
-2. Password Strength Auditor (2024)
-A browser-based password analyser that scores strength, explains weaknesses, and suggests stronger alternatives.
-Everything runs locally — nothing is ever uploaded.
-Screenshots
-password_strong.png
-password_weak.png
-password_very_strong.png
-How to Run
-cd password-strength-auditor
-python3 -m http.server 3001
-Then open: http://localhost:3001
-Test Using These Example Passwords
-Very weak: password
-Strong: Summer2024!
-Very strong: Zypher!AI_9021#24
-You should see:
-• Strength label
-• Score
-• Weakness breakdown
-• Suggested variants
-3. Email Summariser & Action Extractor (2024)
-A Flask-based tool that summarises long emails and extracts clear action items.
-Ideal for work, study or customer communication.
-Screenshot
-email_summariser_output.png
-How to Run
-cd email-summariser-action-extractor
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 app.py
-Open: http://127.0.0.1:5000
-What It Shows
-• Clean summary
-• Action points
-• No data is uploaded — fully local
-4. Zypher AI – Automation Suite (2025)
-A multi-agent automation demo showcasing three fictional AI agents:
-• Appointment Agent
-• Lead Qualification Agent
-• Call Analytics
-Screenshots
-zypher_agents_home.png
-zypher_agent_lead_qualification.png
-zypher_agent_appointment_confirmation.png
-zypher_agent_call_analytics.png
-How to Run
-cd zypher-ai
-python3 -m http.server 3002
-Then open: http://localhost:3002
-How to Test
-Click each agent:
-• Appointment Agent → Confirmation / reschedule JSON
-• Lead Qualification Agent → Score + reasoning
-• Call Analytics → Charts + summary
-Watch the JSON output update in real time.
-5. Smart Inventory Tracker (2024)
-A console-based Python tool that calculates days remaining before stock runs out, and flags items that need attention.
-Screenshot
-inventory_console_output.png
-How to Run
-cd smart-inventory-tracker
-python3 inventory_tracker.py
-What It Shows
-• Item
-• Quantity
-• Daily usage
-• Days left
-• Status (OK / Low / Critical)
-• Warning messages for low-stock items
+# Dev Projects
+[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/DevilDublin/Dev-Projects)
+
+This repository is a collection of small, focused developer projects. Each project is designed to be practical, easy to run locally, and demonstrates a specific task in analytics, automation, or web development using Python, Flask, and vanilla HTML/CSS/JavaScript.
+
+## Projects Overview
+
+| Project                                 | Description                                                                  | Technologies                     |
+| --------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------- |
+| **AI Call Analytics Dashboard**         | A static dashboard for visualizing call center AI agent performance.         | HTML, CSS, Vanilla JS            |
+| **Email Summariser & Action Extractor** | A Flask app that summarizes emails and extracts actionable tasks.            | Python, Flask                    |
+| **Password Strength Auditor**           | A web-based tool to score password strength and suggest improvements.        | Python, Flask                    |
+| **Smart Inventory Tracker**             | A command-line utility to forecast stock depletion based on usage.           | Python (standard library)        |
+| **Zypher AI - Automation Suite**        | A UI demo for a multi-agent AI system with a mock FastAPI backend.           | HTML, JS, Python, FastAPI        |
+
+---
+
+## 1. AI Call Analytics Dashboard
+
+A lightweight, browser-based dashboard for viewing call outcomes from AI voice agents. It visualizes key performance metrics from a `data.json` file.
+
+### Features
+- **Key Metrics:** Displays total calls, confirmations, reschedules, and no-answers.
+- **Confirmation Rate:** Calculates and shows the percentage of successful confirmations.
+- **Call Duration:** Shows the average call duration in seconds.
+- **Daily Trends:** A bar chart visualizes the number of calls handled per day.
+- **Raw Data View:** Includes a section to display the raw JSON payload being used.
+
+### How to Run
+1. Navigate to the project directory:
+   ```sh
+   cd ai-call-analytics-dashboard
+   ```
+2. Start a simple Python web server:
+   ```sh
+   python3 -m http.server 3000
+   ```
+3. Open your browser to `http://localhost:3000`.
+
+To test, you can modify the values in `data.json` and refresh the page to see the dashboard update.
+
+---
+
+## 2. Email Summariser & Action Extractor
+
+A Flask-based web tool that takes long email text as input, provides a concise one-sentence summary, and extracts a clear list of action items.
+
+### Features
+- **AI-Free Logic:** Uses a rule-based system with keywords (`fix`, `send`, `review`) and request triggers (`can you`, `we need to`) to identify tasks.
+- **Clean Output:** Presents a simple summary and a bulleted list of action points.
+- **Local Processing:** All text is processed locally in the Flask backend; no data is sent to external services.
+
+### How to Run
+1. Navigate to the project directory:
+   ```sh
+   cd email-summariser-action-extractor
+   ```
+2. Create and activate a virtual environment:
+   ```sh
+   python3 -m venv venv
+   source venv/bin/activate
+   # On Windows, use: venv\Scripts\activate
+   ```
+3. Install the required dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. Run the Flask application:
+   ```sh
+   python3 app.py
+   ```
+5. Open your browser to `http://127.0.0.1:5000`.
+
+---
+
+## 3. Password Strength Auditor
+
+A simple security tool that scores password strength, explains its weaknesses, and suggests stronger alternatives. The analysis is performed entirely in the browser and backend, with nothing ever being uploaded.
+
+### Features
+- **Strength Scoring:** Rates passwords as "Very Weak," "Strong," etc., based on a scoring system.
+- **Weakness Analysis:** Provides specific reasons for a low score, such as being too short, lacking character variety, or matching a common password.
+- **Suggestions:** Generates stronger, memorable variants of the input password.
+- **Local Auditing:** Reads from `common_passwords.txt` for common password checks.
+
+### How to Run
+1. Navigate to the project directory:
+   ```sh
+   cd password-strength-auditor
+   ```
+2. Create and activate a virtual environment:
+   ```sh
+   python3 -m venv venv
+   source venv/bin/activate
+   # On Windows, use: venv\Scripts\activate
+   ```
+3. Install the required dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. Run the Flask application:
+   ```sh
+   python3 app.py
+   ```
+5. Open your browser to `http://127.0.0.1:5000`.
+
+---
+
+## 4. Smart Inventory Tracker
+
+A console-based Python script that calculates the remaining days before stock runs out and flags items that need reordering.
+
+### Features
+- **CSV Input:** Reads item data from `inventory.csv`, including current quantity and average daily usage.
+- **Depletion Forecasting:** Calculates the "Days Left" for each item.
+- **Status Flagging:** Assigns a status (`OK`, `Low`, `Critical`) based on the forecast.
+- **Actionable Warnings:** Prints a summary of warnings for items with low or critical stock levels.
+
+### How to Run
+1. Navigate to the project directory:
+   ```sh
+   cd smart-inventory-tracker
+   ```
+2. Run the script from your terminal:
+   ```sh
+   python3 inventory_tracker.py
+   ```
+### Example Output
+```
+ SMART INVENTORY TRACKER — CONSOLE VIEW
+ -------------------------------------
+
+Item                    Qty    Daily usage   Days left  Status      
+----------------------------------------------------------------------
+Coffee beans            30     5             6          Low         
+Printer paper           200    12            16.6       OK          
+Bottled water           15     3             5          Low         
+USB cables              8      4             2          Critical    
+Phone cases             5      2             2.5        Critical    
+
+Warnings:
+- Coffee beans: Should be reordered soon
+- Bottled water: Should be reordered soon
+- USB cables: Running critically low
+- Phone cases: Running critically low
+```
+
+---
+
+## 5. Zypher AI - Automation Suite
+
+A frontend demo for a fictional multi-agent AI automation platform. The interface allows you to simulate calls to different AI agents and view the mock JSON responses from a FastAPI backend.
+
+### Features
+- **Agent Simulation:** Provides a UI to interact with three demo agents: Appointment Agent, Lead Qualification Agent, and Call Analytics.
+- **Frontend-Backend Interaction:** The vanilla JavaScript frontend makes API calls to a local mock backend.
+- **Mock API:** The backend is built with FastAPI and serves realistic JSON responses for different agent tasks.
+
+### How to Run
+This project requires running two separate processes in two terminal windows.
+
+**Terminal 1: Run the Backend**
+1. Navigate to the backend directory:
+   ```sh
+   cd zypher-ai/mock-backend
+   ```
+2. Install the required dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+3. Start the FastAPI server with Uvicorn:
+   ```sh
+   uvicorn main:app --reload
+   ```
+   The backend will be running at `http://127.0.0.1:8000`.
+
+**Terminal 2: Run the Frontend**
+1. Navigate to the frontend directory:
+   ```sh
+   cd zypher-ai/frontend
+   ```
+2. Start a simple Python web server:
+   ```sh
+   python3 -m http.server 3000
+   ```
+3. Open your browser to `http://localhost:3000`. Click on the agent cards to see the JSON output from the backend.
